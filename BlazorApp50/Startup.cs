@@ -36,6 +36,7 @@ namespace BlazorApp50
 
             services.AddDbContext<WeatherContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WeatherContext")));
             services.AddBlazoredToast();
+            services.AddScoped<TokenProvider>();
 
         }
 
@@ -58,8 +59,12 @@ namespace BlazorApp50
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });

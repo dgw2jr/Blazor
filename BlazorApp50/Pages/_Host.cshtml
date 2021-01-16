@@ -1,8 +1,13 @@
 ﻿@page "/"
 @namespace BlazorApp50.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
 @{
     Layout = null;
+    var tokens = new InitialApplicationState
+    {
+        XsrfToken = Xsrf.GetAndStoreTokens(HttpContext).RequestToken
+    };
 }
 
 <!DOCTYPE html>
