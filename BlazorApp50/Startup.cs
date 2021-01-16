@@ -1,5 +1,8 @@
 using BlazorApp50.Data;
 using Blazored.Toast;
+using MassTransit;
+using MassTransit.RabbitMqTransport;
+using Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +41,25 @@ namespace BlazorApp50
             services.AddBlazoredToast();
             services.AddScoped<TokenProvider>();
 
+            services.AddMassTransit(x => {
+                x.UsingRabbitMq((ctx, cfg) => {
+                    cfg.Host("192.168.0.88", h =>
+                    {
+                        h.Username("user");
+                        h.Password("BipyglxcSHK2");
+                    });
+
+                    cfg.ReceiveEndpoint("weather-report-created", e =>
+                    {
+                        e.Handler<WeatherReportCreated>(async context =>
+                        {
+                            await Console.Out.WriteLineAsync($"Report Received: {context.Message.Summary}");
+                        });
+                    });
+                });
+            });
+            services.AddMassTransitHostedService();
+            services.AddMediator();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,13 +1,13 @@
 ﻿@page "/weatherreport"
-@inject BlazorApp50.Data.WeatherContext db
+@inject MassTransit.IBus bus
 @inject IToastService toastService
 
 <h3>Weather Report</h3>
 
 <EditForm Model="Report" OnSubmit="Save">
-    Temperature (F) <InputNumber @bind-Value="Report.TemperatureF" class="form-control"/><br />
+    Temperature (F) <InputNumber @bind-Value="Report.TemperatureF" class="form-control" /><br />
     Dew Point (F) <InputNumber @bind-Value="Report.DewPointF" class="form-control" /><br />
-    Summary <InputTextArea @bind-Value="Report.Summary" class="form-control"/><br />
+    Summary <InputTextArea @bind-Value="Report.Summary" class="form-control" /><br />
 
     <button type="submit" class="btn btn-primary">Save</button>
 </EditForm>
@@ -16,17 +16,21 @@
 
     private Data.WeatherReport Report = new Data.WeatherReport();
 
-    private void Save()
+    private async Task Save()
     {
-        Report.CreatedDate = DateTime.UtcNow;
-        db.Add(Report);
-        var changeCount = db.SaveChanges();
+        //Report.CreatedDate = DateTime.UtcNow;
+        //db.Add(Report);
+        //var changeCount = db.SaveChanges();
 
-        if (changeCount > 0)
+        await bus.Publish<Messages.WeatherReportCreated>(new
         {
-            toastService.ShowSuccess("Saved!");
+            TemperatureF = Report.TemperatureF,
+            DewPointF = Report.DewPointF,
+            Summary = Report.Summary
+        });
 
-            Report = new Data.WeatherReport();
-        }
+        toastService.ShowSuccess("Saved!");
+
+        Report = new Data.WeatherReport();
     }
 }

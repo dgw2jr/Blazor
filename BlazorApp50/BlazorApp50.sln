@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp50", "BlazorApp50.csproj", "{BA14F51F-6196-4BEC-A1B1-F3E7D40D935F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "..\Messages\Messages.csproj", "{D549012E-3EF8-4CD7-8A70-82DB161FAB53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BA14F51F-6196-4BEC-A1B1-F3E7D40D935F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA14F51F-6196-4BEC-A1B1-F3E7D40D935F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA14F51F-6196-4BEC-A1B1-F3E7D40D935F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D549012E-3EF8-4CD7-8A70-82DB161FAB53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D549012E-3EF8-4CD7-8A70-82DB161FAB53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D549012E-3EF8-4CD7-8A70-82DB161FAB53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D549012E-3EF8-4CD7-8A70-82DB161FAB53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
