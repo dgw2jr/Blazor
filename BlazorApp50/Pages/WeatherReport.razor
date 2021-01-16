@@ -18,6 +18,7 @@
 
     private void Save()
     {
+        Report.CreatedDate = DateTime.UtcNow;
         db.Add(Report);
         var changeCount = db.SaveChanges();
 

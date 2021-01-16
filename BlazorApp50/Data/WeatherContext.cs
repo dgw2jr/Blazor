@@ -33,5 +33,7 @@ namespace BlazorApp50.Data
         public string Summary { get; set; }
         public int WindSpeedMPH { get; set; }
         public string WindDirection { get; set; }
+
+        public DateTime CreatedDate { get; set; }
     }
 }
