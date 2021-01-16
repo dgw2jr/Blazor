@@ -4,9 +4,9 @@
 
 <h3>Weather Report</h3>
 
-<EditForm Model="@Report" OnSubmit="Save">
+<EditForm Model="Report" OnSubmit="Save">
     Temperature (F) <InputNumber @bind-Value="Report.TemperatureF" class="form-control"/><br />
-    Dew Point (F) <InputNumber @bind-Value="@Report.DewPointF" class="form-control" /><br />
+    Dew Point (F) <InputNumber @bind-Value="Report.DewPointF" class="form-control" /><br />
     Summary <InputTextArea @bind-Value="Report.Summary" class="form-control"/><br />
 
     <button type="submit" class="btn btn-primary">Save</button>
