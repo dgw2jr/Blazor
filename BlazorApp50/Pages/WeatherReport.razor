@@ -4,7 +4,9 @@
 
 <h3>Weather Report</h3>
 
-<EditForm Model="Report" OnSubmit="Save">
+<EditForm Model="Report" OnValidSubmit="Save">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
     Temperature (F) <InputNumber @bind-Value="Report.TemperatureF" class="form-control" /><br />
     Dew Point (F) <InputNumber @bind-Value="Report.DewPointF" class="form-control" /><br />
     Summary <InputTextArea @bind-Value="Report.Summary" class="form-control" /><br />
@@ -26,7 +28,8 @@
         {
             TemperatureF = Report.TemperatureF,
             DewPointF = Report.DewPointF,
-            Summary = Report.Summary
+            Summary = Report.Summary,
+            CreatedDate = DateTime.UtcNow
         });
 
         toastService.ShowSuccess("Saved!");

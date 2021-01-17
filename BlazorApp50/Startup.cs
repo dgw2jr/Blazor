@@ -48,13 +48,13 @@ namespace BlazorApp50
                         h.Password("BipyglxcSHK2");
                     });
 
-                    cfg.ReceiveEndpoint("weather-report-created", e =>
-                    {
-                        e.Handler<WeatherReportCreated>(async context =>
-                        {
-                            await Console.Out.WriteLineAsync($"Report Received: {context.Message.Summary}");
-                        });
-                    });
+                    //cfg.ReceiveEndpoint("weather-report-created", e =>
+                    //{
+                    //    e.Handler<WeatherReportCreated>(async context =>
+                    //    {
+                    //        await Console.Out.WriteLineAsync($"Report Received: {context.Message.Summary}");
+                    //    });
+                    //});
                 });
             });
             services.AddMassTransitHostedService();

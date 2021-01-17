@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,6 +31,8 @@ namespace BlazorApp50.Data
         public Guid WeatherReportId { get; private set; }
         public decimal TemperatureF { get; set; }
         public decimal DewPointF { get; set; }
+
+        [Required]
         public string Summary { get; set; }
         public int WindSpeedMPH { get; set; }
         public string WindDirection { get; set; }
