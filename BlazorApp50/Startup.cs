@@ -35,7 +35,6 @@ namespace BlazorApp50
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
-            Debug.Write(Configuration.ToString());
 
             services.AddDbContext<WeatherContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WeatherContext")));
             services.AddBlazoredToast();
