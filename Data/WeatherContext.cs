@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorApp50.Data
+namespace Core
 {
     public class WeatherContext : DbContext
     {
@@ -18,7 +18,7 @@ namespace BlazorApp50.Data
 
         }
 
-        DbSet<WeatherReport> WeatherReports { get; set; }
+        public DbSet<WeatherReport> WeatherReports { get; set; }
     }
 
     public class WeatherReport

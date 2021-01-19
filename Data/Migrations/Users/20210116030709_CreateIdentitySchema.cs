@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BlazorApp50.Migrations.User
+namespace Core.Users
 {
     public partial class CreateIdentitySchema : Migration
     {

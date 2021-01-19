@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace BlazorApp50.Areas.Identity.Data
+namespace Core.Users
 {
     // Add profile data for application users by adding properties to the User class
     public class User : IdentityUser

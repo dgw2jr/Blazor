@@ -1,21 +1,12 @@
-using BlazorApp50.Data;
+using Core;
 using Blazored.Toast;
 using MassTransit;
-using MassTransit.RabbitMqTransport;
-using Messages;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BlazorApp50
 {
@@ -34,7 +25,6 @@ namespace BlazorApp50
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
 
             services.AddDbContext<WeatherContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WeatherContext")));
             services.AddBlazoredToast();
@@ -57,7 +47,6 @@ namespace BlazorApp50
                     //});
                 });
             });
-            services.AddMassTransitHostedService();
             services.AddMediator();
         }
 

@@ -1,6 +1,7 @@
-﻿@page "/weatherreport"
+﻿@page "/createweatherreport"
 @inject MassTransit.IBus bus
 @inject IToastService toastService
+@using Core
 
 <h3>Weather Report</h3>
 
@@ -16,7 +17,7 @@
 
 @code {
 
-    private Data.WeatherReport Report = new Data.WeatherReport();
+    private WeatherReport Report = new WeatherReport();
 
     private async Task Save()
     {
@@ -34,6 +35,6 @@
 
         toastService.ShowSuccess("Saved!");
 
-        Report = new Data.WeatherReport();
+        Report = new Core.WeatherReport();
     }
 }

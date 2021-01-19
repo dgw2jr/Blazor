@@ -1,6 +1,5 @@
 ﻿using System;
-using BlazorApp50.Areas.Identity.Data;
-using BlazorApp50.Data;
+using Core.Users;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
