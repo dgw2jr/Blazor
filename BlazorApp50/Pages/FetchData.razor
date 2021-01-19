@@ -12,6 +12,7 @@
 }
 else
 {
+    <button @onclick="@ShowModal" class="btn btn-primary">Create Report</button><br />
     <table class="table">
         <thead>
             <tr>
@@ -34,10 +35,26 @@ else
 }
 
 @code {
-    private WeatherReport[] forecasts;
+    private List<WeatherReport> forecasts;
+    [CascadingParameter] public IModalService Modal { get; set; }
 
     protected override void OnInitialized()
     {
-        forecasts = context.WeatherReports.ToArray();
+        forecasts = context.WeatherReports.OrderByDescending(r => r.CreatedDate).ToList();
+    }
+
+    async Task ShowModal()
+    {
+        var formModal = Modal.Show<CreateWeatherReport>("Create Weather Report", new ModalOptions { Animation = ModalAnimation.FadeInOut(1) });
+        var result = await formModal.Result;
+
+        if (result.Cancelled)
+        {
+            Console.WriteLine("Modal was cancelled");
+        }
+        else
+        {
+            forecasts.Insert(0, result.Data as WeatherReport);
+        }
     }
 }

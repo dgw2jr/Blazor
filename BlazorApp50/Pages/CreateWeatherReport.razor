@@ -3,8 +3,6 @@
 @inject IToastService toastService
 @using Core
 
-<h3>Weather Report</h3>
-
 <EditForm Model="Report" OnValidSubmit="Save">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
@@ -17,24 +15,23 @@
 
 @code {
 
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+
     private WeatherReport Report = new WeatherReport();
 
     private async Task Save()
     {
-        //Report.CreatedDate = DateTime.UtcNow;
-        //db.Add(Report);
-        //var changeCount = db.SaveChanges();
-
+        Report.CreatedDate = DateTime.UtcNow;
         await bus.Publish<Messages.WeatherReportCreated>(new
         {
             TemperatureF = Report.TemperatureF,
             DewPointF = Report.DewPointF,
             Summary = Report.Summary,
-            CreatedDate = DateTime.UtcNow
+            CreatedDate = Report.CreatedDate
         });
 
         toastService.ShowSuccess("Saved!");
 
-        Report = new Core.WeatherReport();
+        await ModalInstance.CloseAsync(ModalResult.Ok<WeatherReport>(Report));
     }
 }
