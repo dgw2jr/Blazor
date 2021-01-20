@@ -1,6 +1,6 @@
 ﻿@page "/fetchdata"
 @using Core
-@inject WeatherContext context
+@inject IRequestClient<GetWeatherReports> weatherReportsClient
 
 <h1>Weather forecast</h1>
 
@@ -38,9 +38,10 @@ else
     private List<WeatherReport> forecasts;
     [CascadingParameter] public IModalService Modal { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        forecasts = context.WeatherReports.OrderByDescending(r => r.CreatedDate).ToList();
+        var response = await weatherReportsClient.GetResponse<GetWeatherReportsResult>(new { });
+        forecasts = response.Message.WeatherReports;
     }
 
     async Task ShowModal()

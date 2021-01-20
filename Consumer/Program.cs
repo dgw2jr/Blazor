@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace Consumer
 {
@@ -76,6 +77,32 @@ namespace Consumer
             await _weatherContext.SaveChangesAsync();
 
             await Console.Out.WriteLineAsync($"{context.MessageId} Saved successfully!");
+        }
+    }
+
+    public class GetWeatherReportsConsumer : IConsumer<GetWeatherReports>
+    {
+        private readonly WeatherContext _weatherContext;
+
+        public GetWeatherReportsConsumer(WeatherContext weatherContext)
+        {
+            _weatherContext = weatherContext;
+        }
+
+        public async Task Consume(ConsumeContext<GetWeatherReports> context)
+        {
+            var reports = _weatherContext.WeatherReports.OrderByDescending(r => r.CreatedDate);
+
+            if(context.Message.Count != null)
+            {
+                reports = (IOrderedQueryable<WeatherReport>)reports.Take(context.Message.Count.Value);
+            }
+
+            var result = await reports.ToListAsync();
+
+            await Console.Out.WriteLineAsync($"{context.Message.GetType().Name}: Returning {result.Count} results");
+
+            await context.RespondAsync<GetWeatherReportsResult>(new { WeatherReports = result });
         }
     }
 }

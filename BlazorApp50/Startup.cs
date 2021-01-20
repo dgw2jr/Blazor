@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blazored.Modal;
+using Messages;
 
 namespace BlazorApp50
 {
@@ -33,21 +34,20 @@ namespace BlazorApp50
             services.AddScoped<TokenProvider>();
 
             services.AddMassTransit(x => {
+                x.SetKebabCaseEndpointNameFormatter();
+
                 x.UsingRabbitMq((ctx, cfg) => {
                     cfg.Host("192.168.0.88", h =>
                     {
                         h.Username("user");
                         h.Password("BipyglxcSHK2");
-                    });
+                    });                    
 
-                    //cfg.ReceiveEndpoint("weather-report-created", e =>
-                    //{
-                    //    e.Handler<WeatherReportCreated>(async context =>
-                    //    {
-                    //        await Console.Out.WriteLineAsync($"Report Received: {context.Message.Summary}");
-                    //    });
-                    //});
+                    cfg.ConfigureEndpoints(ctx);
                 });
+
+                x.AddRequestClient<GetWeatherReports>();
+                
             });
             services.AddMediator();
         }
@@ -80,6 +80,8 @@ namespace BlazorApp50
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
+
+            app.ApplicationServices.GetService<IBusControl>().Start();
         }
     }
 }
