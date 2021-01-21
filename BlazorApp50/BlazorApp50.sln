@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer", "..\Consumer\Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "..\Data\Core.csproj", "{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{8F748985-BCE6-4229-A6E7-2ECFD1253288}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp50.Microservices.TrafficReport", "..\BlazorApp50.Microservices.TrafficReport\BlazorApp50.Microservices.TrafficReport.csproj", "{6296F69F-87A6-4BD0-9E6D-92C4390F3485}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6296F69F-87A6-4BD0-9E6D-92C4390F3485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6296F69F-87A6-4BD0-9E6D-92C4390F3485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6296F69F-87A6-4BD0-9E6D-92C4390F3485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6296F69F-87A6-4BD0-9E6D-92C4390F3485}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6296F69F-87A6-4BD0-9E6D-92C4390F3485} = {8F748985-BCE6-4229-A6E7-2ECFD1253288}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1E78092-9372-446B-8D39-EFDBD6DA00C8}
