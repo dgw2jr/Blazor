@@ -36,6 +36,7 @@ namespace BlazorApp50
             services.AddServerSideBlazor();
 
             services.AddDbContext<WeatherContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WeatherContext")));
+            services.AddDbContext<TrafficContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TrafficContext")));
             services.AddBlazoredToast();
             services.AddBlazoredModal();
             services.AddScoped<TokenProvider>();
