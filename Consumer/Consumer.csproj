@@ -32,5 +32,8 @@
     <ProjectReference Include="..\Data\Core.csproj" />
     <ProjectReference Include="..\Messages\Messages.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(SolutionDir)CommonSettings.json" CopyToOutputDirectory="PreserveNewest" LinkBase="\" />
+  </ItemGroup>
 
 </Project>

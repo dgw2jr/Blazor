@@ -11,6 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer", "..\Consumer\Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "..\Data\Core.csproj", "{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonSettings", "CommonSettings", "{6E3376B9-DAD5-482E-9486-5A3FFC2D3431}"
+	ProjectSection(SolutionItems) = preProject
+		CommonSettings.json = CommonSettings.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

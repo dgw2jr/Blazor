@@ -25,6 +25,7 @@ namespace BlazorApp50
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
@@ -37,10 +38,10 @@ namespace BlazorApp50
                 x.SetKebabCaseEndpointNameFormatter();
 
                 x.UsingRabbitMq((ctx, cfg) => {
-                    cfg.Host("192.168.0.88", h =>
+                    cfg.Host(Configuration.GetValue<string>("MassTransit:Host"), h =>
                     {
-                        h.Username("user");
-                        h.Password("BipyglxcSHK2");
+                        h.Username(Configuration.GetValue<string>("MassTransit:Username"));
+                        h.Password(Configuration.GetValue<string>("MassTransit:Password"));
                     });                    
 
                     cfg.ConfigureEndpoints(ctx);
@@ -50,6 +51,7 @@ namespace BlazorApp50
                 
             });
             services.AddMediator();
+            services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,7 +83,7 @@ namespace BlazorApp50
                 endpoints.MapFallbackToPage("/_Host");
             });
 
-            app.ApplicationServices.GetService<IBusControl>().Start();
+            //app.ApplicationServices.GetService<IBusControl>().Start();
         }
     }
 }

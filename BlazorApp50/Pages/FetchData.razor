@@ -12,7 +12,8 @@
 }
 else
 {
-    <button @onclick="@ShowModal" class="btn btn-primary">Create Report</button><br />
+    <button @onclick="@ShowModal" class="btn btn-primary">Create Report</button>
+    <br />
     <table class="table">
         <thead>
             <tr>
@@ -38,10 +39,14 @@ else
     private List<WeatherReport> forecasts;
     [CascadingParameter] public IModalService Modal { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (!firstRender) return;
+
         var response = await weatherReportsClient.GetResponse<GetWeatherReportsResult>(new { });
         forecasts = response.Message.WeatherReports;
+
+        StateHasChanged();
     }
 
     async Task ShowModal()
