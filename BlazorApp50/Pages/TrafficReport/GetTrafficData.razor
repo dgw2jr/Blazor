@@ -1,10 +1,10 @@
 ﻿@page "/GetTrafficData"
 
-<h1>Weather forecast</h1>
+<h1>Traffic reports</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (TrafficReports == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -16,16 +16,14 @@ else
         <thead>
             <tr>
                 <th>Date</th>
-                <th>Temp. (F)</th>
                 <th>Summary</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var forecast in TrafficReports)
             {
                 <tr>
                     <td>@forecast.CreatedDate.ToShortDateString()</td>
-                    <td>@forecast.TemperatureF</td>
                     <td>@forecast.Summary</td>
                 </tr>
             }
