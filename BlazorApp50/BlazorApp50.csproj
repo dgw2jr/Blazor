@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorApp50.Microservices.TrafficReport\BlazorApp50.Microservices.TrafficReport.csproj" />
     <ProjectReference Include="..\Data\Core.csproj" />
     <ProjectReference Include="..\Messages\Messages.csproj" />
   </ItemGroup>

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp50", "BlazorApp50.csproj", "{BA14F51F-6196-4BEC-A1B1-F3E7D40D935F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6296F69F-87A6-4BD0-9E6D-92C4390F3485} = {6296F69F-87A6-4BD0-9E6D-92C4390F3485}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messages", "..\Messages\Messages.csproj", "{D549012E-3EF8-4CD7-8A70-82DB161FAB53}"
 EndProject

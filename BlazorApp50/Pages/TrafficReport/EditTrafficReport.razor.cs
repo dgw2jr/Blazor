@@ -1,4 +1,5 @@
-﻿using Blazored.Modal;
+﻿using BlazorApp50.Microservices.TrafficReport.Messages;
+using Blazored.Modal;
 using Blazored.Modal.Services;
 using Core;
 using Microsoft.AspNetCore.Components;
@@ -21,14 +22,11 @@ namespace BlazorApp50.Pages.TrafficReport
         {
             Report.CreatedDate = DateTime.UtcNow;
 
-            Context.Add(Report);
-            Context.SaveChanges();
-
-            //await bus.Publish<Messages.WeatherReportCreated>(new
-            //{
-            //    Summary = Report.Summary,
-            //    CreatedDate = Report.CreatedDate
-            //});
+            await bus.Publish<ITrafficReportCreatedMessage>(new
+            {
+                Summary = Report.Summary,
+                CreatedDate = Report.CreatedDate
+            });
 
             toastService.ShowSuccess("Saved!");
 

@@ -1,14 +1,14 @@
-using Core;
+using Blazored.Modal;
 using Blazored.Toast;
+using Core;
 using MassTransit;
+using Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Blazored.Modal;
-using Messages;
 
 namespace BlazorApp50
 {
@@ -45,7 +45,7 @@ namespace BlazorApp50
                 x.SetKebabCaseEndpointNameFormatter();
 
                 x.UsingRabbitMq((ctx, cfg) => {
-                    cfg.Host("192.168.0.88", h =>
+                    cfg.Host("192.168.0.101", h =>
                     {
                         h.Username("user");
                         h.Password("BipyglxcSHK2");
