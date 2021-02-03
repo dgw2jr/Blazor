@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using System.IO;
+using MassTransit.Azure.ServiceBus.Core.Configurators;
+using System;
 
 namespace Consumer
 {
@@ -32,14 +34,27 @@ namespace Consumer
                     {
                         c.SetKebabCaseEndpointNameFormatter();
 
-                        c.UsingRabbitMq((context, cfg) =>
-                        {
-                            cfg.Host(ctx.Configuration.GetValue<string>("MassTransit:Host"), h =>
-                            {
-                                h.Username(ctx.Configuration.GetValue<string>("MassTransit:Username"));
-                                h.Password(ctx.Configuration.GetValue<string>("MassTransit:Password"));
-                            });
+                        //c.UsingRabbitMq((context, cfg) =>
+                        //{
+                        //    cfg.Host(ctx.Configuration.GetValue<string>("MassTransit:Host"), h =>
+                        //    {
+                        //        h.Username(ctx.Configuration.GetValue<string>("MassTransit:Username"));
+                        //        h.Password(ctx.Configuration.GetValue<string>("MassTransit:Password"));
+                        //    });
 
+                        //    cfg.ConfigureEndpoints(context);
+                        //});
+
+                        c.UsingAzureServiceBus((context, cfg) =>
+                        {
+                            var settings = new HostSettings
+                            {
+                                ServiceUri = new Uri(ctx.Configuration.GetValue<string>("MassTransit:Host")),
+                                TokenProvider = Microsoft.Azure.ServiceBus.Primitives.TokenProvider.CreateSharedAccessSignatureTokenProvider(ctx.Configuration.GetValue<string>("MassTransit:Username"),
+                                ctx.Configuration.GetValue<string>("MassTransit:Password"))
+                            };
+
+                            cfg.Host(settings);
                             cfg.ConfigureEndpoints(context);
                         });
 

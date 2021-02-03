@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blazored.Modal;
 using Messages;
+using MassTransit.Azure.ServiceBus.Core.Configurators;
+using System;
 
 namespace BlazorApp50
 {
@@ -37,13 +39,25 @@ namespace BlazorApp50
             services.AddMassTransit(x => {
                 x.SetKebabCaseEndpointNameFormatter();
 
-                x.UsingRabbitMq((ctx, cfg) => {
-                    cfg.Host(Configuration.GetValue<string>("MassTransit:Host"), h =>
-                    {
-                        h.Username(Configuration.GetValue<string>("MassTransit:Username"));
-                        h.Password(Configuration.GetValue<string>("MassTransit:Password"));
-                    });                    
+                //x.UsingRabbitMq((ctx, cfg) => {
+                //    cfg.Host(Configuration.GetValue<string>("MassTransit:Host"), h =>
+                //    {
+                //        h.Username(Configuration.GetValue<string>("MassTransit:Username"));
+                //        h.Password(Configuration.GetValue<string>("MassTransit:Password"));
+                //    });                    
 
+                //    cfg.ConfigureEndpoints(ctx);
+                //});
+
+                x.UsingAzureServiceBus((ctx, cfg) =>
+                {
+                    var settings = new HostSettings
+                    {
+                        ServiceUri = new Uri(Configuration.GetValue<string>("MassTransit:Host")),
+                        TokenProvider = Microsoft.Azure.ServiceBus.Primitives.TokenProvider.CreateSharedAccessSignatureTokenProvider(Configuration.GetValue<string>("MassTransit:Username"), Configuration.GetValue<string>("MassTransit:Password"))
+                    };
+
+                    cfg.Host(settings);
                     cfg.ConfigureEndpoints(ctx);
                 });
 
