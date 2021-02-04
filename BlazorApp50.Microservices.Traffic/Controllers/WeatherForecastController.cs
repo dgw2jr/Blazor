@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorApp50.Microservices.TrafficReport.Controllers
+namespace BlazorApp50.Microservices.Traffic.Controllers
 {
     [ApiController]
     [Route("[controller]")]

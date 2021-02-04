@@ -1,4 +1,5 @@
-using BlazorApp50.Microservices.TrafficReport.Messages;
+using BlazorApp50.Microservices.Traffic.Data;
+using BlazorApp50.Microservices.Traffic.Messages;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,8 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace BlazorApp50.Microservices.TrafficReport
+namespace BlazorApp50.Microservices.Traffic
 {
     public class Startup
     {
@@ -21,11 +23,12 @@ namespace BlazorApp50.Microservices.TrafficReport
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TrafficContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TrafficContext")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BlazorApp50.Microservices.TrafficReport", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BlazorApp50.Microservices.Traffic", Version = "v1" });
             });
 
             services.AddMassTransit(c =>
@@ -57,7 +60,7 @@ namespace BlazorApp50.Microservices.TrafficReport
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlazorApp50.Microservices.TrafficReport v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlazorApp50.Microservices.Traffic v1"));
             }
 
             app.UseHttpsRedirection();

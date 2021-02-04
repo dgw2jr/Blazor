@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Core.Migrations.Traffic
+namespace BlazorApp50.Microservices.Traffic.Data.Migrations
 {
-    public partial class AddTrafficReport : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

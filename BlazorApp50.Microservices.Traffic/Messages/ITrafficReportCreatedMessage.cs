@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BlazorApp50.Microservices.TrafficReport.Messages
+namespace BlazorApp50.Microservices.Traffic.Messages
 {
     public interface ITrafficReportCreatedMessage
     {

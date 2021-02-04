@@ -1,6 +1,6 @@
 using System;
 
-namespace BlazorApp50.Microservices.TrafficReport
+namespace BlazorApp50.Microservices.Traffic
 {
     public class WeatherForecast
     {

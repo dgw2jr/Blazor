@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlazorApp50
 {
@@ -36,7 +37,6 @@ namespace BlazorApp50
             services.AddServerSideBlazor();
 
             services.AddDbContext<WeatherContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WeatherContext")));
-            services.AddDbContext<TrafficContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TrafficContext")));
             services.AddBlazoredToast();
             services.AddBlazoredModal();
             services.AddScoped<TokenProvider>();

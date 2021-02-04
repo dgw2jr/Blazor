@@ -1,22 +1,19 @@
-﻿using BlazorApp50.Microservices.TrafficReport.Messages;
+﻿using BlazorApp50.Microservices.Traffic.Data.Models;
+using BlazorApp50.Microservices.Traffic.Messages;
 using Blazored.Modal;
 using Blazored.Modal.Services;
-using Core;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
 
-namespace BlazorApp50.Pages.TrafficReport
+namespace BlazorApp50.Pages.TrafficReports
 {
     public partial class EditTrafficReport : ComponentBase
     {
         [CascadingParameter] 
         BlazoredModalInstance ModalInstance { get; set; }
 
-        private readonly Core.TrafficReport Report = new Core.TrafficReport();
-
-        [Inject]
-        private TrafficContext Context { get; set; }
+        private readonly TrafficReport Report = new TrafficReport();
 
         private async Task Save()
         {

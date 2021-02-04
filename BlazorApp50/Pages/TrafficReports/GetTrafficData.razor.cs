@@ -1,8 +1,7 @@
-﻿using Blazored.Modal;
+﻿using BlazorApp50.Microservices.Traffic.Data;
+using BlazorApp50.Microservices.Traffic.Data.Models;
+using Blazored.Modal;
 using Blazored.Modal.Services;
-using Core;
-using MassTransit;
-using Messages;
 using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorApp50.Pages.TrafficReport
+namespace BlazorApp50.Pages.TrafficReports
 {
     public partial class GetTrafficData : ComponentBase
     {
@@ -18,7 +17,7 @@ namespace BlazorApp50.Pages.TrafficReport
         private TrafficContext Context { get; set; }
 
         [Parameter]
-        public List<Core.TrafficReport> TrafficReports { get; set; }
+        public List<TrafficReport> TrafficReports { get; set; }
 
         [CascadingParameter] 
         public IModalService Modal { get; set; }
@@ -43,7 +42,7 @@ namespace BlazorApp50.Pages.TrafficReport
             }
             else
             {
-                TrafficReports.Insert(0, result.Data as Core.TrafficReport);
+                TrafficReports.Insert(0, result.Data as TrafficReport);
             }
         }
     }

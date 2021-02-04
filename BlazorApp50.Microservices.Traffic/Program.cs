@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorApp50.Microservices.TrafficReport
+namespace BlazorApp50.Microservices.Traffic
 {
     public class Program
     {
