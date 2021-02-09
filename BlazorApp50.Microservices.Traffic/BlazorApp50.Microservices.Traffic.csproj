@@ -30,4 +30,8 @@
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
+<ItemGroup>
+    <Content Include="$(SolutionDir)CommonSettings.json" CopyToOutputDirectory="PreserveNewest" LinkBase="\" />
+  </ItemGroup>
+
 </Project>
