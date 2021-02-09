@@ -11,14 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consumer", "..\Consumer\Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "..\Data\Core.csproj", "{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{8F748985-BCE6-4229-A6E7-2ECFD1253288}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp50.Microservices.Traffic", "..\BlazorApp50.Microservices.Traffic\BlazorApp50.Microservices.Traffic.csproj", "{E056429F-D1B2-47C8-B3C1-3BE3A383661C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonSettings", "CommonSettings", "{6E3376B9-DAD5-482E-9486-5A3FFC2D3431}"
 	ProjectSection(SolutionItems) = preProject
 		CommonSettings.json = CommonSettings.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{ACA2D45D-5A07-4AE6-AD63-915055A01641}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

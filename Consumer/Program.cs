@@ -10,6 +10,7 @@ using System.Reflection;
 using System.IO;
 using MassTransit.Azure.ServiceBus.Core.Configurators;
 using System;
+using Shared;
 
 namespace Consumer
 {
@@ -30,34 +31,8 @@ namespace Consumer
                 {
                     services.AddDbContext<WeatherContext>(options => options.UseSqlServer(ctx.Configuration.GetConnectionString("WeatherContext")));
 
-                    services.AddMassTransit(c =>
+                    services.UseMassTransit(c =>
                     {
-                        c.SetKebabCaseEndpointNameFormatter();
-
-                        //c.UsingRabbitMq((context, cfg) =>
-                        //{
-                        //    cfg.Host(ctx.Configuration.GetValue<string>("MassTransit:Host"), h =>
-                        //    {
-                        //        h.Username(ctx.Configuration.GetValue<string>("MassTransit:Username"));
-                        //        h.Password(ctx.Configuration.GetValue<string>("MassTransit:Password"));
-                        //    });
-
-                        //    cfg.ConfigureEndpoints(context);
-                        //});
-
-                        c.UsingAzureServiceBus((context, cfg) =>
-                        {
-                            var settings = new HostSettings
-                            {
-                                ServiceUri = new Uri(ctx.Configuration.GetValue<string>("MassTransit:Host")),
-                                TokenProvider = Microsoft.Azure.ServiceBus.Primitives.TokenProvider.CreateSharedAccessSignatureTokenProvider(ctx.Configuration.GetValue<string>("MassTransit:Username"),
-                                ctx.Configuration.GetValue<string>("MassTransit:Password"))
-                            };
-
-                            cfg.Host(settings);
-                            cfg.ConfigureEndpoints(context);
-                        });
-
                         c.AddConsumers(typeof(Program).Assembly);
                     });
 

@@ -15,6 +15,7 @@ using MassTransit.Azure.ServiceBus.Core.Configurators;
 using System;
 using Microsoft.EntityFrameworkCore;
 using BlazorApp50.Microservices.Traffic.Messages;
+using Shared;
 
 namespace BlazorApp50
 {
@@ -46,31 +47,8 @@ namespace BlazorApp50
             services.AddBlazoredModal();
             services.AddScoped<TokenProvider>();
 
-            services.AddMassTransit(x => {
-                x.SetKebabCaseEndpointNameFormatter();
-
-                //x.UsingRabbitMq((ctx, cfg) => {
-                //    cfg.Host(Configuration.GetValue<string>("MassTransit:Host"), h =>
-                //    {
-                //        h.Username(Configuration.GetValue<string>("MassTransit:Username"));
-                //        h.Password(Configuration.GetValue<string>("MassTransit:Password"));
-                //    });                    
-
-                //    cfg.ConfigureEndpoints(ctx);
-                //});
-
-                x.UsingAzureServiceBus((ctx, cfg) =>
-                {
-                    var settings = new HostSettings
-                    {
-                        ServiceUri = new Uri(Configuration.GetValue<string>("MassTransit:Host")),
-                        TokenProvider = Microsoft.Azure.ServiceBus.Primitives.TokenProvider.CreateSharedAccessSignatureTokenProvider(Configuration.GetValue<string>("MassTransit:Username"), Configuration.GetValue<string>("MassTransit:Password"))
-                    };
-
-                    cfg.Host(settings);
-                    cfg.ConfigureEndpoints(ctx);
-                });
-
+            services.UseMassTransit(x =>
+            {
                 x.AddRequestClient<GetWeatherReports>();
                 x.AddRequestClient<IGetTrafficReportsMessage>();
             });
@@ -109,5 +87,5 @@ namespace BlazorApp50
 
             //app.ApplicationServices.GetService<IBusControl>().Start();
         }
-    }
+    }    
 }

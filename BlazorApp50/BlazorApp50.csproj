@@ -32,6 +32,7 @@
     <ProjectReference Include="..\BlazorApp50.Microservices.Traffic\BlazorApp50.Microservices.Traffic.csproj" />
     <ProjectReference Include="..\Data\Core.csproj" />
     <ProjectReference Include="..\Messages\Messages.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(SolutionDir)CommonSettings.json" CopyToOutputDirectory="PreserveNewest" LinkBase="\" />
