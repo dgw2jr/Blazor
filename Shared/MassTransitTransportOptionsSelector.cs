@@ -33,7 +33,7 @@ namespace Shared
             cfg.ConfigureEndpoints(ctx);
         });
 
-        public static void UseTransport(this IServiceCollectionBusConfigurator serviceCollectionBusConfigurator, Action<IServiceCollectionBusConfigurator> configurator)
+        private static void UseTransport(this IServiceCollectionBusConfigurator serviceCollectionBusConfigurator, Action<IServiceCollectionBusConfigurator> configurator)
         {
             configurator(serviceCollectionBusConfigurator);
         }
