@@ -35,7 +35,6 @@ namespace BlazorApp50.Microservices.Traffic
 
             services.UseMassTransit(x =>
             {
-                x.UseTransport(MassTransitTransportOptionsSelector.RabbitMq);
                 x.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
             });
 
