@@ -1,3 +1,4 @@
+using BlazorApp50.Microservices.Traffic.Messages;
 using Blazored.Modal;
 using Blazored.Toast;
 using Core;
@@ -9,12 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Blazored.Modal;
-using Messages;
-using MassTransit.Azure.ServiceBus.Core.Configurators;
-using System;
-using Microsoft.EntityFrameworkCore;
-using BlazorApp50.Microservices.Traffic.Messages;
 using Shared;
 
 namespace BlazorApp50
@@ -49,6 +44,7 @@ namespace BlazorApp50
 
             services.UseMassTransit(x =>
             {
+                x.UseTransport(MassTransitTransportOptionsSelector.RabbitMq);
                 x.AddRequestClient<GetWeatherReports>();
                 x.AddRequestClient<IGetTrafficReportsMessage>();
             });
