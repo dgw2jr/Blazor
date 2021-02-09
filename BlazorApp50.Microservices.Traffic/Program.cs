@@ -18,6 +18,13 @@ namespace BlazorApp50.Microservices.Traffic
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config
+                    .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+                    .AddJsonFile("CommonSettings.json", optional: true)
+                    .AddJsonFile($"CommonSettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true);
+            })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
