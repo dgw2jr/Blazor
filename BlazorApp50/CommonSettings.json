@@ -1,7 +1,7 @@
 {
   "MassTransit": {
-    "Host": "192.168.254.68",
-    "Username": "user",
-    "Password": "ogSyHDas45c8"
+    "Host": "sb://DonDev.servicebus.windows.net/",
+    "Username": "RootManageSharedAccessKey",
+    "Password": ""
   }
 }
