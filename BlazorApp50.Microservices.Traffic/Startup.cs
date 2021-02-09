@@ -1,13 +1,14 @@
+using BlazorApp50.Microservices.Traffic.Consumers;
 using BlazorApp50.Microservices.Traffic.Data;
 using BlazorApp50.Microservices.Traffic.Messages;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlazorApp50.Microservices.Traffic
 {
@@ -37,7 +38,7 @@ namespace BlazorApp50.Microservices.Traffic
 
                 c.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host("192.168.0.101", h =>
+                    cfg.Host("192.168.0.104", h =>
                     {
                         h.Username("user");
                         h.Password("BipyglxcSHK2");
@@ -46,8 +47,8 @@ namespace BlazorApp50.Microservices.Traffic
                     cfg.ConfigureEndpoints(ctx);
                 });
 
-                c.AddConsumers(typeof(Program).Assembly);
-                c.AddRequestClient<ITrafficReportCreatedMessage>();
+                c.AddRequestClient<IGetTrafficReportsMessage>(); //TODO Is this needed here?
+                c.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
             });
 
             services.AddMassTransitHostedService();

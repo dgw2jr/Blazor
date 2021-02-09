@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using BlazorApp50.Microservices.Traffic.Messages;
 
 namespace BlazorApp50
 {
@@ -45,7 +46,7 @@ namespace BlazorApp50
                 x.SetKebabCaseEndpointNameFormatter();
 
                 x.UsingRabbitMq((ctx, cfg) => {
-                    cfg.Host("192.168.0.101", h =>
+                    cfg.Host("192.168.0.104", h =>
                     {
                         h.Username("user");
                         h.Password("BipyglxcSHK2");
@@ -55,7 +56,7 @@ namespace BlazorApp50
                 });
 
                 x.AddRequestClient<GetWeatherReports>();
-                
+                x.AddRequestClient<IGetTrafficReportsMessage>();
             });
             services.AddMediator();
         }
