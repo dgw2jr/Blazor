@@ -7,8 +7,9 @@
   <ItemGroup>
     <PackageReference Include="Blazored.Modal" Version="6.0.1" />
     <PackageReference Include="Blazored.Toast" Version="3.1.2" />
-    <PackageReference Include="MassTransit" Version="7.1.2" />
+    <PackageReference Include="MassTransit" Version="7.1.4" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.1.2" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="7.1.4" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.1.2" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.2" />
@@ -31,6 +32,9 @@
     <ProjectReference Include="..\BlazorApp50.Microservices.Traffic\BlazorApp50.Microservices.Traffic.csproj" />
     <ProjectReference Include="..\Data\Core.csproj" />
     <ProjectReference Include="..\Messages\Messages.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(SolutionDir)CommonSettings.json" CopyToOutputDirectory="PreserveNewest" LinkBase="\" />
   </ItemGroup>
 
 </Project>

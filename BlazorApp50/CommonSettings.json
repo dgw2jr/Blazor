@@ -1,0 +1,7 @@
+{
+  "MassTransit": {
+    "Host": "sb://DonDev.servicebus.windows.net/",
+    "Username": "RootManageSharedAccessKey",
+    "Password": ""
+  }
+}

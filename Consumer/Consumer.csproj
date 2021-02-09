@@ -18,8 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MassTransit" Version="7.1.2" />
+    <PackageReference Include="MassTransit" Version="7.1.4" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.1.2" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="7.1.4" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.1.2" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
@@ -31,6 +32,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Data\Core.csproj" />
     <ProjectReference Include="..\Messages\Messages.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(SolutionDir)CommonSettings.json" CopyToOutputDirectory="PreserveNewest" LinkBase="\" />
   </ItemGroup>
 
 </Project>
