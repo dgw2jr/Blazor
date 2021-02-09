@@ -8,42 +8,34 @@ using System.Collections.Generic;
 
 namespace Shared
 {
-    public enum MassTransitTransportOptions
-    {
-        RabbitMq,
-        AzureServiceBus
-    }
-
     public static class MassTransitTransportOptionsSelector
     {
-        private static Dictionary<MassTransitTransportOptions, Action<IServiceCollectionBusConfigurator>> _strategies = new Dictionary<MassTransitTransportOptions, Action<IServiceCollectionBusConfigurator>>
+        public static Action<IServiceCollectionBusConfigurator> RabbitMq = x => x.UsingRabbitMq((ctx, cfg) =>
         {
-            [MassTransitTransportOptions.RabbitMq] = (x) => x.UsingRabbitMq((ctx, cfg) =>
+            cfg.Host(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Host"), h =>
             {
-                cfg.Host(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Host"), h =>
-                {
-                    h.Username(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Username"));
-                    h.Password(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Password"));
-                });
+                h.Username(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Username"));
+                h.Password(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Password"));
+            });
 
-                cfg.ConfigureEndpoints(ctx);
-            }),
-            [MassTransitTransportOptions.AzureServiceBus] = (x) => x.UsingAzureServiceBus((ctx, cfg) =>
-            {
-                var settings = new HostSettings
-                {
-                    ServiceUri = new Uri(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Host")),
-                    TokenProvider = Microsoft.Azure.ServiceBus.Primitives.TokenProvider.CreateSharedAccessSignatureTokenProvider(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Username"), ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Password"))
-                };
+            cfg.ConfigureEndpoints(ctx);
+        });
 
-                cfg.Host(settings);
-                cfg.ConfigureEndpoints(ctx);
-            })
-        };
-
-        public static void UseTransport(this IServiceCollectionBusConfigurator serviceCollectionBusConfigurator, MassTransitTransportOptions transportOptions)
+        public static Action<IServiceCollectionBusConfigurator> AzureServiceBus = x => x.UsingAzureServiceBus((ctx, cfg) =>
         {
-            _strategies[transportOptions](serviceCollectionBusConfigurator);
+            var settings = new HostSettings
+            {
+                ServiceUri = new Uri(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Host")),
+                TokenProvider = Microsoft.Azure.ServiceBus.Primitives.TokenProvider.CreateSharedAccessSignatureTokenProvider(ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Username"), ctx.GetService<IConfiguration>().GetValue<string>("MassTransit:Password"))
+            };
+
+            cfg.Host(settings);
+            cfg.ConfigureEndpoints(ctx);
+        });
+
+        public static void UseTransport(this IServiceCollectionBusConfigurator serviceCollectionBusConfigurator, Action<IServiceCollectionBusConfigurator> configurator)
+        {
+            configurator(serviceCollectionBusConfigurator);
         }
 
         public static IServiceCollection UseMassTransit(this IServiceCollection services, Action<IServiceCollectionBusConfigurator> serviceCollectionBusConfigurator)
@@ -52,7 +44,7 @@ namespace Shared
             {
                 x.SetKebabCaseEndpointNameFormatter();
 
-                x.UseTransport(MassTransitTransportOptions.AzureServiceBus);
+                x.UseTransport(AzureServiceBus);
 
                 serviceCollectionBusConfigurator(x);
             });
