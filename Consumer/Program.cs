@@ -28,7 +28,7 @@ namespace Consumer
 
                         c.UsingRabbitMq((ctx, cfg) =>
                         {
-                            cfg.Host("192.168.0.104", h =>
+                            cfg.Host("192.168.0.88", h =>
                             {
                                 h.Username("user");
                                 h.Password("BipyglxcSHK2");
