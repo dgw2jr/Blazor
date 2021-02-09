@@ -38,7 +38,7 @@ namespace BlazorApp50.Microservices.Traffic
 
                 c.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host("192.168.0.104", h =>
+                    cfg.Host("192.168.0.88", h =>
                     {
                         h.Username("user");
                         h.Password("BipyglxcSHK2");
@@ -47,11 +47,10 @@ namespace BlazorApp50.Microservices.Traffic
                     cfg.ConfigureEndpoints(ctx);
                 });
 
-                c.AddRequestClient<IGetTrafficReportsMessage>(); //TODO Is this needed here?
                 c.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
             });
 
-            services.AddMassTransitHostedService();
+            //services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +73,8 @@ namespace BlazorApp50.Microservices.Traffic
             {
                 endpoints.MapControllers();
             });
+
+            app.ApplicationServices.GetService<IBusControl>().Start();
         }
     }
 }
