@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonSettings", "CommonSet
 		CommonSettings.json = CommonSettings.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{ACA2D45D-5A07-4AE6-AD63-915055A01641}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23EEEE3E-1E8B-4EDA-8D35-61D639FF288A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA2D45D-5A07-4AE6-AD63-915055A01641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA2D45D-5A07-4AE6-AD63-915055A01641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA2D45D-5A07-4AE6-AD63-915055A01641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA2D45D-5A07-4AE6-AD63-915055A01641}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
