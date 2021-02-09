@@ -44,7 +44,6 @@ namespace BlazorApp50
 
             services.UseMassTransit(x =>
             {
-                x.UseTransport(MassTransitTransportOptionsSelector.RabbitMq);
                 x.AddRequestClient<GetWeatherReports>();
                 x.AddRequestClient<IGetTrafficReportsMessage>();
             });

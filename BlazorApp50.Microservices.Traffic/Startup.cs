@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Shared;
 
 namespace BlazorApp50.Microservices.Traffic
 {
@@ -32,23 +33,29 @@ namespace BlazorApp50.Microservices.Traffic
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BlazorApp50.Microservices.Traffic", Version = "v1" });
             });
 
-            services.AddMassTransit(c =>
+            services.UseMassTransit(x =>
             {
-                c.SetKebabCaseEndpointNameFormatter();
-
-                c.UsingRabbitMq((ctx, cfg) =>
-                {
-                    cfg.Host("192.168.0.88", h =>
-                    {
-                        h.Username("user");
-                        h.Password("BipyglxcSHK2");
-                    });
-
-                    cfg.ConfigureEndpoints(ctx);
-                });
-
-                c.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
+                x.UseTransport(MassTransitTransportOptionsSelector.RabbitMq);
+                //x.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
             });
+
+            //services.UseMassTransit(c =>
+            //{
+            //    c.SetKebabCaseEndpointNameFormatter();
+
+            //    c.UsingRabbitMq((ctx, cfg) =>
+            //    {
+            //        cfg.Host("192.168.0.88", h =>
+            //        {
+            //            h.Username("user");
+            //            h.Password("BipyglxcSHK2");
+            //        });
+
+            //        cfg.ConfigureEndpoints(ctx);
+            //    });
+
+            //    c.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
+            //});
 
             //services.AddMassTransitHostedService();
         }
