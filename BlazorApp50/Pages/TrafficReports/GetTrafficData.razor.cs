@@ -1,8 +1,8 @@
-﻿using BlazorApp50.Microservices.Traffic.Data.Models;
-using BlazorApp50.Microservices.Traffic.Messages;
+﻿using BlazorApp50.Microservices.Traffic.Data.Dtos;
+using BlazorApp50.Microservices.Traffic.Data.Models;
+using BlazorApp50.Pages.TrafficReports.Services;
 using Blazored.Modal;
 using Blazored.Modal.Services;
-using MassTransit;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -12,21 +12,18 @@ namespace BlazorApp50.Pages.TrafficReports
 {
     public partial class GetTrafficData : ComponentBase
     {
-        [Parameter]
-        public List<TrafficReport> TrafficReports { get; set; }
-
         [Inject]
-        public IRequestClient<IGetTrafficReportsMessage> RequestClient { get; set; }
+        public ITrafficService TrafficService { get; set; }
+
+        [Parameter]
+        public List<TrafficReportDto> TrafficReports { get; set; }
 
         [CascadingParameter] 
         public IModalService Modal { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            var response = await RequestClient.GetResponse<IGetTrafficReportsResult>(new { });
-            var result = response.Message.TrafficReports;
-
-            TrafficReports = result;
+            TrafficReports = await TrafficService.GetTrafficReports();
         }
 
         public async Task ShowModal()
@@ -40,7 +37,7 @@ namespace BlazorApp50.Pages.TrafficReports
             }
             else
             {
-                TrafficReports.Insert(0, result.Data as TrafficReport);
+                TrafficReports.Insert(0, result.Data as TrafficReportDto);
             }
         }
     }

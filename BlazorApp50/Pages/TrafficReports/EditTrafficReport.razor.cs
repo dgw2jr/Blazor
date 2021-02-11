@@ -1,4 +1,5 @@
-﻿using BlazorApp50.Microservices.Traffic.Data.Models;
+﻿using BlazorApp50.Microservices.Traffic.Data.Dtos;
+using BlazorApp50.Microservices.Traffic.Data.Models;
 using BlazorApp50.Microservices.Traffic.Messages;
 using Blazored.Modal;
 using Blazored.Modal.Services;
@@ -13,7 +14,7 @@ namespace BlazorApp50.Pages.TrafficReports
         [CascadingParameter] 
         BlazoredModalInstance ModalInstance { get; set; }
 
-        private readonly TrafficReport Report = new TrafficReport();
+        private readonly TrafficReportDto Report = new TrafficReportDto();
 
         private async Task Save()
         {

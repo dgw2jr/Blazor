@@ -1,4 +1,5 @@
 using BlazorApp50.Microservices.Traffic.Messages;
+using BlazorApp50.Pages.TrafficReports.Services;
 using Blazored.Modal;
 using Blazored.Toast;
 using Core;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Shared;
+using System;
 
 namespace BlazorApp50
 {
@@ -41,6 +43,9 @@ namespace BlazorApp50
             services.AddBlazoredToast();
             services.AddBlazoredModal();
             services.AddScoped<TokenProvider>();
+
+            services.AddHttpClient<ITrafficService, TrafficService>(c =>
+                c.BaseAddress = new Uri(Configuration["ApiConfigs:Traffic:Uri"]));
 
             services.UseMassTransit(x =>
             {

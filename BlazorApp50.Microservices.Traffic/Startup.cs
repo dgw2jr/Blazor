@@ -35,6 +35,7 @@ namespace BlazorApp50.Microservices.Traffic
 
             services.UseMassTransit(x =>
             {
+                x.AddRequestClient<IGetTrafficReportsMessage>();
                 x.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
             });
 
