@@ -1,39 +1,51 @@
-using Core;
+using BlazorApp50.Microservices.Traffic.Messages;
+using BlazorApp50.Pages.TrafficReports.Services;
+using Blazored.Modal;
 using Blazored.Toast;
+using Core;
 using MassTransit;
+using Messages;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Blazored.Modal;
-using Messages;
 using Shared;
+using System;
 
 namespace BlazorApp50
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Env = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var razorPagesBuilder = services.AddRazorPages();
+            if (Env.IsDevelopment())
+            {
+                razorPagesBuilder.AddRazorRuntimeCompilation();
+            }
 
-            services.AddRazorPages();
             services.AddServerSideBlazor();
 
             services.AddDbContext<WeatherContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WeatherContext")));
             services.AddBlazoredToast();
             services.AddBlazoredModal();
             services.AddScoped<TokenProvider>();
+
+            services.AddHttpClient<ITrafficService, TrafficService>(c =>
+                c.BaseAddress = new Uri(Configuration["ApiConfigs:Traffic:Uri"]));
 
             services.UseMassTransit(x =>
             {
