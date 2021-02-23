@@ -1,6 +1,5 @@
 using BlazorApp50.Microservices.Traffic.Consumers;
 using BlazorApp50.Microservices.Traffic.Data;
-using BlazorApp50.Microservices.Traffic.Messages;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,29 +34,8 @@ namespace BlazorApp50.Microservices.Traffic
 
             services.UseMassTransit(x =>
             {
-                x.AddRequestClient<IGetTrafficReportsMessage>();
-                x.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
+                x.AddConsumers(typeof(TrafficReportCreatedConsumer).Assembly);
             });
-
-            //services.UseMassTransit(c =>
-            //{
-            //    c.SetKebabCaseEndpointNameFormatter();
-
-            //    c.UsingRabbitMq((ctx, cfg) =>
-            //    {
-            //        cfg.Host("192.168.0.88", h =>
-            //        {
-            //            h.Username("user");
-            //            h.Password("BipyglxcSHK2");
-            //        });
-
-            //        cfg.ConfigureEndpoints(ctx);
-            //    });
-
-            //    c.AddConsumers(typeof(GetTrafficReportsConsumer).Assembly);
-            //});
-
-            //services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

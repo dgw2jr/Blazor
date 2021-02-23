@@ -1,7 +1,7 @@
 ﻿using BlazorApp50.Microservices.Traffic.Data.Models;
 using System;
 
-namespace BlazorApp50.Microservices.Traffic.Data.Dtos
+namespace BlazorApp50.Pages.TrafficReports.Dtos
 {
     public class TrafficReportDto
     {

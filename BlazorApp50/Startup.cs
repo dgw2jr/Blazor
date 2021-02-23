@@ -50,7 +50,6 @@ namespace BlazorApp50
             services.UseMassTransit(x =>
             {
                 x.AddRequestClient<GetWeatherReports>();
-                x.AddRequestClient<IGetTrafficReportsMessage>();
             });
             services.AddMediator();
             services.AddMassTransitHostedService();

@@ -1,5 +1,4 @@
-﻿using BlazorApp50.Microservices.Traffic.Data.Dtos;
-using BlazorApp50.Microservices.Traffic.Data.Models;
+﻿using BlazorApp50.Pages.TrafficReports.Dtos;
 using BlazorApp50.Pages.TrafficReports.Services;
 using Blazored.Modal;
 using Blazored.Modal.Services;
@@ -23,7 +22,7 @@ namespace BlazorApp50.Pages.TrafficReports
 
         protected override async Task OnInitializedAsync()
         {
-            TrafficReports = await TrafficService.GetTrafficReports();
+            TrafficReports = await TrafficService.GetTrafficReportDtos();
         }
 
         public async Task ShowModal()
