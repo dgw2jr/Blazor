@@ -1,5 +1,7 @@
 ﻿@page "/GetTrafficData"
 
+@using BlazorApp50.Pages.TrafficReports.Dtos;
+
 @code{
     bool loading = true;
 }
@@ -24,23 +26,23 @@ else if (TrafficReports.Count == 0)
 }
 else
 {
-    <button @onclick="@ShowModal" class="btn btn-primary">Create Report</button>
+<div>
+    <AntDesign.Row Gutter="(16,32)">
+        <AntDesign.Col>
+            <AntDesign.Button Type="@ButtonType.Primary" Icon="add" Shape="@ButtonShape.Round" OnClick="@ShowModal">Create Report</AntDesign.Button>
+        </AntDesign.Col>
+    </AntDesign.Row>
+
     <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in TrafficReports)
-            {
-                <tr>
-                    <td>@forecast.CreatedDate.ToShortDateString()</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <br />
+
+    <AntDesign.Row Gutter="(16,32)">
+        <AntDesign.Col>
+            <AntDesign.Table TItem="TrafficReportDto" DataSource="@TrafficReports">
+                <Column Title="Date" @bind-Field="@context.CreatedDate" Sortable />
+                <Column Title="Summary" @bind-Field="@context.Summary" />
+            </AntDesign.Table>
+        </AntDesign.Col>
+    </AntDesign.Row>
+</div>
 }
