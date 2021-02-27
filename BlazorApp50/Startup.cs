@@ -53,6 +53,8 @@ namespace BlazorApp50
             });
             services.AddMediator();
             services.AddMassTransitHostedService();
+
+            services.AddAntDesign();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

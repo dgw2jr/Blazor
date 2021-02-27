@@ -51,7 +51,7 @@ else
 
     async Task ShowModal()
     {
-        var formModal = Modal.Show<CreateWeatherReport>("Create Weather Report", new ModalOptions { Animation = ModalAnimation.FadeInOut(1) });
+        var formModal = Modal.Show<CreateWeatherReport>("Create Weather Report", new Blazored.Modal.ModalOptions { Animation = Blazored.Modal.ModalAnimation.FadeInOut(1) });
         var result = await formModal.Result;
 
         if (result.Cancelled)

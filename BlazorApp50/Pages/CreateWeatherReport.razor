@@ -6,8 +6,8 @@
 <EditForm Model="Report" OnValidSubmit="Save">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
-    Temperature (F) <InputNumber @bind-Value="Report.TemperatureF" class="form-control" /><br />
-    Dew Point (F) <InputNumber @bind-Value="Report.DewPointF" class="form-control" /><br />
+    Temperature (F) <AntDesign.InputNumber @bind-Value="Report.TemperatureF" class="form-control" /><br />
+    Dew Point (F) <AntDesign.InputNumber @bind-Value="Report.DewPointF" class="form-control" /><br />
     Summary <InputTextArea @bind-Value="Report.Summary" class="form-control" /><br />
 
     <button type="submit" class="btn btn-primary">Save</button>
